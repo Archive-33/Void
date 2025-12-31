@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOID // 33 ARCHIVE - SAVE 1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;700;900&display=swap');
+        
+        body {
+            background-color: #020202;
+            color: #FFFBF0;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        .grain {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Grain.visuallight.png');
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        .chrome-text {
+            background: linear-gradient(180deg, #FFFFFF 0%, #A0A0A0 50%, #404040 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 30px rgba(255,255,255,0.15));
+            letter-spacing: 0.2em;
+        }
+
+        .enter-btn {
+            border: 1px solid rgba(255, 251, 240, 0.1);
+            backdrop-filter: blur(15px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .enter-btn:hover {
+            background: #FFFBF0;
+            color: #000;
+            letter-spacing: 1em;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(255,255,255,0.1);
+        }
+
+        .void-glow {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.03) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .chrome-star {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+            filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.6));
+            will-change: transform;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(var(--r)); }
+            50% { transform: translate(var(--tx), var(--ty)) rotate(calc(var(--r) + 12deg)); }
+        }
+
+        .floating {
+            animation: float var(--d, 10s) ease-in-out infinite;
+        }
+
+        .sci-fi-title {
+            font-size: clamp(4rem, 15vw, 12rem);
+            line-height: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        #star-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen relative">
+    <div class="grain"></div>
+    <div class="void-glow"></div>
+
+    <svg style="display:none">
+        <symbol id="star-3d" viewBox="0 0 100 100">
+            <defs>
+                <linearGradient id="chrome-face" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#ffffff" />
+                    <stop offset="45%" style="stop-color:#c0c0c0" />
+                    <stop offset="100%" style="stop-color:#606060" />
+                </linearGradient>
+                <linearGradient id="chrome-depth" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#404040" />
+                    <stop offset="100%" style="stop-color:#111111" />
+                </linearGradient>
+            </defs>
+            <path fill="url(#chrome-depth)" d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z" />
+            <path fill="url(#chrome-face)" d="M50 5 L58 42 L95 50 L58 58 L50 95 L42 58 L5 50 L42 42 Z" />
+            <circle cx="45" cy="45" r="4" fill="white" fill-opacity="0.8" />
+        </symbol>
+    </svg>
+
+    <div id="star-container"></div>
+
+    <div class="text-center z-10 px-4">
+        <h2 class="text-[12px] tracking-[2em] uppercase mb-4 opacity-40 font-bold">System // 33</h2>
+        <div class="mb-6"><h1 class="font-black chrome-text sci-fi-title italic uppercase">VOID</h1></div>
+        <p class="text-[10px] tracking-[0.8em] uppercase mb-20 text-gray-600">System Archive // 0033.25</p>
+        
+        <!-- Updated Link to your Creator-Spring Store -->
+        <a href="https://my-store-10d36f6.creator-spring.com" target="_blank" rel="noopener noreferrer" class="enter-btn px-20 py-4 text-[11px] tracking-[0.6em] uppercase inline-block italic">
+            Enter
+        </a>
+    </div>
+
+    <script>
+        const container = document.getElementById('star-container');
+        const starCount = 100;
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+            const size = Math.random() * (60 - 10) + 10;
+            const top = Math.random() * 100;
+            const left = Math.random() * 100;
+            const rotation = Math.random() * 360;
+            const tx = (Math.random() - 0.5) * 60;
+            const ty = (Math.random() - 0.5) * 60;
+            const duration = Math.random() * (15 - 5) + 5;
+            const delay = Math.random() * -20;
+            const opacity = Math.random() * (0.9 - 0.2) + 0.2;
+            star.setAttribute('class', 'chrome-star floating');
+            star.style.width = `${size}px`; star.style.height = `${size}px`;
+            star.style.top = `${top}%`; star.style.left = `${left}%`;
+            star.style.opacity = opacity; star.style.setProperty('--r', `${rotation}deg`);
+            star.style.setProperty('--tx', `${tx}px`); star.style.setProperty('--ty', `${ty}px`);
+            star.style.setProperty('--d', `${duration}s`); star.style.animationDelay = `${delay}s`;
+            use.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#star-3d');
+            star.appendChild(use); container.appendChild(star);
+        }
+    </script>
+</body>
+</html>
